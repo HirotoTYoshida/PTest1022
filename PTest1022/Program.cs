@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -21,10 +22,10 @@ namespace PTest1022 {
             //６以上…「６以上です」
 
             /*** ●●● ここへ解答を入力 ●●● ***/
+
             
-
-
-
+            outStr = inputNum ??"5以下です"  "6以上です";
+            
 
             /*** ●●●●● ここまで ●●●●● ***/
             Console.WriteLine($"結果：{outStr}\n");
@@ -41,7 +42,7 @@ namespace PTest1022 {
             /*** ●●● ここへ解答を入力 ●●● ***/
 
 
-
+            data = Exam_2_Stab() ?? -9999;
 
 
 
@@ -83,19 +84,20 @@ namespace PTest1022 {
         private void Exam_4() {
             Console.WriteLine($"\n〇問題４");
             var books = new Books().GetBooks();
-            int pageSum = 0;
+            //int pageSum = 0;
 
             //金額が1200円以上の書籍を抽出せよ
             //出力については「タイトル」と「金額」を出力すること
-            
+
             /*** ●●● ここへ解答を入力 ●●● ***/
 
-
-
+            var selected = books.Where(b => b.Price >= 1200);
+            foreach (var book in selected)
+                Console.WriteLine("{0}{1}", book.Title, book.Price);
 
 
             /*** ●●●●● ここまで ●●●●● ***/
-            Console.WriteLine($"ページの合計は{ pageSum }ページです。");
+            //Console.WriteLine($"ページの合計は{ pageSum }ページです。");
         }
 
         //問題５
@@ -107,7 +109,9 @@ namespace PTest1022 {
             //出力については「タイトル」と「ページ数」を出力すること
 
             /*** ●●● ここへ解答を入力 ●●● ***/
-
+            var selected = books.Where(b => b.Title.Contains("物語") && b.Pages >= 400);
+            foreach (var book in selected)
+                Console.WriteLine("{0}{1}",book.Title,book.Pages);
 
 
 
@@ -124,8 +128,7 @@ namespace PTest1022 {
             // 出力例）79 65 53 45 35 34 20 12
             /*** ●●● ここへ解答を入力 ●●● ***/
 
-
-
+            
 
 
             /*** ●●●●● ここまで ●●●●● ***/
@@ -170,6 +173,7 @@ namespace PTest1022 {
         static void Main(string[] args) {
             //staticの使用を避けるために自分自身のインスタンスを生成
             new Program();
+            
         }
         //コンストラクタ
         public Program() {
